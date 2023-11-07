@@ -1,10 +1,9 @@
 from fastapi import FastAPI
+from contextlib import asynccontextmanager
 import uvicorn
+import aioredis
 from api.api_v1.api import router as auth_router
-
-
-app = FastAPI()
-
+from core.config import settings
 
 app.include_router(auth_router)
 
