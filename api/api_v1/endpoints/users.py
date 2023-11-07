@@ -1,9 +1,11 @@
-from fastapi import APIRouter, status, HTTPException
+from fastapi import APIRouter, status, HTTPException, Request
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 import httpx
 import json
-from schemas.users import UserRegister
+from schemas.users import UserRegister, UserLogin
+from auth.jwt import JWTToken
+from core.config import settings
 
 
 router = APIRouter(prefix="/users", tags=["users"])
