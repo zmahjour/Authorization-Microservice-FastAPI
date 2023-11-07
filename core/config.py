@@ -9,6 +9,11 @@ class Settings(BaseSettings):
     ACCESS_EXPIRE_TIME: timedelta = timedelta(days=1)
     REFRESH_EXPIRE_TIME: timedelta = timedelta(days=30)
 
+    # Redis
+    REDIS_HOST: str
+    REDIS_PORT: int
+    REDIS_DB: int
+
     class Config:
         env_file = "/home/samane/Documents/MaktabSharif/FinalProject/Authorization-Microservice-FastAPI/.env"
 
