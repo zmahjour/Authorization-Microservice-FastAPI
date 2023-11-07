@@ -14,6 +14,7 @@ router = APIRouter(prefix="/users", tags=["users"])
 @router.post("/register")
 async def user_register(user: UserRegister):
     user_data = jsonable_encoder(user)
+    del user_data["confirm_password"]
     account_register_url = "http://localhost:8001/account/register"
 
     async with httpx.AsyncClient() as client:
