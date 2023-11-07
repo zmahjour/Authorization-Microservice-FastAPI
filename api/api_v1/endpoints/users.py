@@ -74,3 +74,9 @@ async def user_login(request: Request, user: UserLogin):
             status_code=response.status_code,
         )
 
+
+@router.get("/logout")
+async def user_logout():
+    pass
+
+
