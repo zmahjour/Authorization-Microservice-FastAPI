@@ -9,5 +9,8 @@ class Settings(BaseSettings):
     ACCESS_EXPIRE_TIME = timedelta(days=1)
     REFRESH_EXPIRE_TIME = timedelta(days=30)
 
+    class Config:
+        env_file = "/home/samane/Documents/MaktabSharif/FinalProject/Authorization-Microservice-FastAPI/.env"
+
 
 settings = Settings()
