@@ -6,8 +6,8 @@ class Settings(BaseSettings):
     # JWT
     SECRET_KEY: str
     ALGORITHM: str
-    ACCESS_EXPIRE_TIME = timedelta(days=1)
-    REFRESH_EXPIRE_TIME = timedelta(days=30)
+    ACCESS_EXPIRE_TIME: timedelta = timedelta(days=1)
+    REFRESH_EXPIRE_TIME: timedelta = timedelta(days=30)
 
     class Config:
         env_file = "/home/samane/Documents/MaktabSharif/FinalProject/Authorization-Microservice-FastAPI/.env"
