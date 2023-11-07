@@ -80,3 +80,6 @@ async def user_logout():
     pass
 
 
+@router.post("/token")
+async def obtain_access_token():
+    pass
