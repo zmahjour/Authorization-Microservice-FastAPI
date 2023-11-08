@@ -9,3 +9,9 @@ class JWTAuthentication:
         token = header.replace("Bearer", "").replace(" ", "")
         return token
 
+    @staticmethod
+    def decode_jwt_token(token):
+        payload = jwt.decode(
+            token=token, key=settings.SECRET_KEY, algorithms=settings.ALGORITHM
+        )
+        return payload
