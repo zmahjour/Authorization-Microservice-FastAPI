@@ -4,7 +4,7 @@ from fastapi.encoders import jsonable_encoder
 import httpx
 import json
 from schemas.users import UserRegister, UserLogin
-from auth.jwt import JWTToken
+from auth.utils import JWTToken
 from core.config import settings
 
 
