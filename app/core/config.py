@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     REDIS_DB: int
 
     class Config:
-        env_file = "/home/samane/Documents/MaktabSharif/FinalProject/Authorization-Microservice-FastAPI/.env"
+        env_file = "/home/samane/Documents/MaktabSharif/FinalProject/Project/Authorization/.env"
 
 
 settings = Settings()
