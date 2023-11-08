@@ -1,4 +1,4 @@
-from jose import jwt
+import jwt
 import datetime
 import uuid
 import pytz
