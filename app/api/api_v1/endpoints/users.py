@@ -76,9 +76,15 @@ async def user_login(request: Request, user: UserLogin):
         )
 
 
-@router.get("/logout")
-async def user_logout():
-    pass
+@router.get("/logout", status_code=status.HTTP_200_OK)
+async def user_logout(request: Request, authorization: str = Header()):
+    payload = await auth.authenticate(request=request, auth_header=authorization)
+
+    if payload:
+        jti = payload.get("jti")
+        await auth.delete_jti_from_cache(request=request, jti=jti)
+
+        return "You have logged out successfully."
 
 
 @router.post("/token")
