@@ -15,7 +15,7 @@ router = APIRouter(prefix="/users", tags=["users"])
 async def user_register(user: UserRegister):
     user_data = jsonable_encoder(user)
     del user_data["confirm_password"]
-    account_register_url = "http://localhost:8001/account/register"
+    account_register_url = f"{settings.ACCOUNT_APP_BASE_URL}/account/register"
 
     async with httpx.AsyncClient() as client:
         response = await client.post(url=account_register_url, json=user_data)
@@ -44,7 +44,7 @@ async def user_register(user: UserRegister):
 @router.post("/login")
 async def user_login(request: Request, user: UserLogin):
     user_data = jsonable_encoder(user)
-    account_login_url = "http://localhost:8001/account/login"
+    account_login_url = f"{settings.ACCOUNT_APP_BASE_URL}/account/login"
     redis = request.app.state.redis
 
     async with httpx.AsyncClient() as client:
