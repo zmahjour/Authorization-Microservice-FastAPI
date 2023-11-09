@@ -12,3 +12,13 @@ class UserLogin(BaseModel):
     username: str | None = None
     email: EmailStr | None = None
     password: str
+
+
+class OtpEmail(BaseModel):
+    email: EmailStr
+
+
+class OtpCodeData(BaseModel):
+    email: EmailStr
+    username: str
+    code: int
