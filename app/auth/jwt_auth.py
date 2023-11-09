@@ -31,14 +31,8 @@ class JWTAuthentication:
                 status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token."
             )
 
-        try:
-            username = payload.get("user_username")
-            return username
-        except:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Username not found in JWT.",
-            )
+        return payload
+
 
     @staticmethod
     def get_token_from_header(header):
