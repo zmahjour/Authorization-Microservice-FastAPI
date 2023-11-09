@@ -2,7 +2,6 @@ from pydantic import BaseModel, EmailStr
 
 
 class UserRegister(BaseModel):
-    _id: str
     username: str
     email: EmailStr
     password: str
@@ -10,7 +9,6 @@ class UserRegister(BaseModel):
 
 
 class UserLogin(BaseModel):
-    _id: str
-    username: str | None
-    email: EmailStr | None
+    username: str | None = None
+    email: EmailStr | None = None
     password: str
