@@ -5,6 +5,7 @@ import httpx
 import json
 from schemas.users import UserRegister, UserLogin
 from auth.utils import JWTToken
+from auth.jwt_auth import auth
 from core.config import settings
 
 
