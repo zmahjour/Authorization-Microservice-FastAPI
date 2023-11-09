@@ -33,6 +33,10 @@ class JWTAuthentication:
 
         return payload
 
+    @staticmethod
+    async def delete_jti_from_cache(request, jti):
+        redis = request.app.state.redis
+        await redis.delete(jti)
 
     @staticmethod
     def get_token_from_header(header):
