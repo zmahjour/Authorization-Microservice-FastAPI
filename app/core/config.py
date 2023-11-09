@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     REDIS_DB: int
 
     ACCOUNT_APP_BASE_URL: str
+    NOTIFICATION_APP_BASE_URL: str
 
     class Config:
         env_file = "/home/samane/Documents/MaktabSharif/FinalProject/Project/Authorization/.env"
