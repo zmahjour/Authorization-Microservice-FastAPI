@@ -64,7 +64,7 @@ async def user_login(request: Request, user: UserLogin):
     elif response.status_code == status.HTTP_200_OK:
         jwt_token = JWTToken()
         jti, access_token, refresh_token = jwt_token.generate_access_and_refresh_token(
-            user=user
+            username=user.username
         )
         refresh_exp_seconds = settings.REFRESH_EXPIRE_TIME.total_seconds()
 
