@@ -76,6 +76,35 @@ async def user_login(request: Request, user: UserLogin):
         )
 
 
+@router.post("/otp/login")
+async def otp_login(otp_email: OtpEmail):
+    data = jsonable_encoder(otp_email)
+    account_otp_login_url = f"{settings.ACCOUNT_APP_BASE_URL}/account/otp/login"
+    notification_send_email_url = f"{settings.NOTIFICATION_APP_BASE_URL}/notif/email"
+
+    async with httpx.AsyncClient() as client:
+        response = await client.post(url=account_otp_login_url, json=data)
+
+    if response.status_code == status.HTTP_404_NOT_FOUND:
+        raise HTTPException(
+            status_code=response.status_code,
+            detail=json.loads(response.text).get("detail"),
+        )
+    elif response.status_code == status.HTTP_200_OK:
+        async with httpx.AsyncClient() as client:
+            notif_response = await client.post(
+                url=notification_send_email_url, json={"email": [data["email"]]}
+            )
+
+        username = json.loads(response.text).get("username")
+
+        return JSONResponse(
+            content=json.loads(notif_response.text),
+            status_code=response.status_code,
+        )
+
+
+
 @router.get("/logout", status_code=status.HTTP_200_OK)
 async def user_logout(request: Request, authorization: str = Header()):
     payload = await auth.authenticate(request=request, auth_header=authorization)
