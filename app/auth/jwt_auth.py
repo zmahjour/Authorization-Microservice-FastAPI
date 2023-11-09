@@ -42,6 +42,6 @@ class JWTAuthentication:
     @staticmethod
     def decode_jwt_token(token):
         payload = jwt.decode(
-            token=token, key=settings.SECRET_KEY, algorithms=settings.ALGORITHM
+            token, key=settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
         )
         return payload
