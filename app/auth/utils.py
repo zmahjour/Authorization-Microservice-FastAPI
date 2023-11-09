@@ -10,9 +10,9 @@ class JWTToken:
     def jti(self):
         return str(uuid.uuid4())
 
-    def generate_access_token(self, jti, user):
+    def generate_access_token(self, jti, username):
         access_token_payload = {
-            "user_username": user.username,
+            "username": username,
             "exp": datetime.datetime.now(tz=pytz.timezone("Asia/Tehran"))
             + settings.ACCESS_EXPIRE_TIME,
             "iat": datetime.datetime.now(tz=pytz.timezone("Asia/Tehran")),
@@ -24,9 +24,9 @@ class JWTToken:
         )
         return access_token
 
-    def generate_refresh_token(self, jti, user):
+    def generate_refresh_token(self, jti, username):
         refresh_token_payload = {
-            "user_username": user.username,
+            "username": username,
             "exp": datetime.datetime.now(tz=pytz.timezone("Asia/Tehran"))
             + settings.REFRESH_EXPIRE_TIME,
             "iat": datetime.datetime.now(tz=pytz.timezone("Asia/Tehran")),
@@ -38,8 +38,8 @@ class JWTToken:
         )
         return refresh_token
 
-    def generate_access_and_refresh_token(self, user):
+    def generate_access_and_refresh_token(self, username):
         jti = self.jti
-        access_token = self.generate_access_token(jti=jti, user=user)
-        refresh_token = self.generate_refresh_token(jti=jti, user=user)
+        access_token = self.generate_access_token(jti=jti, username=username)
+        refresh_token = self.generate_refresh_token(jti=jti, username=username)
         return jti, access_token, refresh_token
