@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 import httpx
 import json
-from schemas.users import UserRegister, UserLogin
+from schemas.users import UserRegister, UserLogin, OtpEmail, OtpCodeData
 from auth.utils import JWTToken
 from auth.jwt_auth import auth
 from core.config import settings
