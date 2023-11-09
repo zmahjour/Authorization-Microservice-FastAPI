@@ -104,6 +104,31 @@ async def otp_login(otp_email: OtpEmail):
         )
 
 
+@router.post("/otp/verify")
+async def otp_verify(request: Request, otp: OtpCodeData):
+    otp_code = otp.code
+    redis = request.app.state.redis
+    cached_code = await redis.get(otp.email)
+
+    if cached_code and int(cached_code.decode("utf-8")) == otp_code:
+        jwt_token = JWTToken()
+        jti, access_token, refresh_token = jwt_token.generate_access_and_refresh_token(
+            username=otp.username
+        )
+        refresh_exp_seconds = settings.REFRESH_EXPIRE_TIME.total_seconds()
+
+        await redis.set(jti, "whitelist", int(refresh_exp_seconds))
+
+        return JSONResponse(
+            content={"access_token": access_token, "refresh_token": refresh_token},
+            status_code=status.HTTP_200_OK,
+        )
+    else:
+        return JSONResponse(
+            content={"detail": "Invalid code."},
+            status_code=status.HTTP_406_NOT_ACCEPTABLE,
+        )
+
 
 @router.get("/logout", status_code=status.HTTP_200_OK)
 async def user_logout(request: Request, authorization: str = Header()):
