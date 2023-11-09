@@ -49,3 +49,6 @@ class JWTAuthentication:
             token, key=settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
         )
         return payload
+
+
+auth = JWTAuthentication()
